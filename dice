@@ -1,0 +1,32 @@
+int kPinButton1 = 7;
+int kPinLed1 = 1;
+int kPinLed2 = 2;
+int kPinLed3 = 3;
+int kPinLed4 = 4;
+int kPinLed5 = 5;
+int kPinLed6 = 6;
+int myPins [] = {1,2,3,4,5,6};
+int j= random (1,7);
+void setup() {
+  // put your setup code here, to run once:
+pinMode(myPins[0], OUTPUT);
+pinMode(myPins[1], OUTPUT);
+pinMode(myPins[2], OUTPUT);
+pinMode(myPins[3], OUTPUT);
+pinMode(myPins[4], OUTPUT);
+pinMode(myPins[5], OUTPUT);
+pinMode(kPinButton1, INPUT);
+digitalWrite(kPinButton1,HIGH);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  if (digitalRead(kPinButton1) == LOW){
+    digitalWrite(kPinLed4,HIGH);
+    delay(1234);
+  }
+  else {
+    digitalWrite(kPinLed4,LOW);
+  }
+ }
+
