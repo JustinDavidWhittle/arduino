@@ -17,7 +17,7 @@ void setup() {
   }
   pinMode(button , INPUT);
   digitalWrite(button, HIGH);
-  attachInterrupt(0, interrupt, FALLING);
+  attachInterrupt(2, interrupt, FALLING);
 }
 
 void interrupt() {
