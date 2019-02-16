@@ -1,0 +1,64 @@
+int myPins [] = {6, 7, 8, 9, 10, 11};
+int jackpot = 4;
+int button = 2;
+
+int delayValue = 300;
+int score = 0;
+
+// get first pin
+// myPins[0]
+// get the i-th pin
+// myPins[i-1]
+
+void setup() {
+  // put your setup code here, to run once:
+  for (int i = 0; i < 6; i++) {
+    pinMode(myPins[i], OUTPUT);
+  }
+  pinMode(button , INPUT);
+  digitalWrite(button, HIGH);
+  attachInterrupt(0, interrupt, FALLING);
+}
+
+void interrupt() {
+  delayMicroseconds(20000);
+  // increase speed
+  delayValue = delayValue - 50;
+  // if pinLED is on
+  // increment score
+  // else you lost.
+  if (digitalRead(jackpot) == HIGH) {
+    score++;
+  } else {
+    // you lost
+    Serial.begin(9600);
+    Serial.print("Your score: ");
+    Serial.println(score);
+    while (true) {
+      for (int i = 0; i < 6; i++) {
+        digitalWrite(myPins[i], HIGH);
+      }
+      delay(500);
+      for (int i = 0; i < 6; i++) {
+        digitalWrite(myPins[i], LOW);
+      }
+      delay(500);
+    }
+  }
+}
+
+void blink(int pinIndex, int delayTime) {
+  digitalWrite(myPins[pinIndex], HIGH);
+  delay(delayTime);
+  digitalWrite(myPins[pinIndex], LOW);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  for (int i = 0; i < 6; i++) {
+    blink(i, delayValue);
+    if (digitalRead(button) == LOW) {
+      interrupt();
+    }
+  }
+}
